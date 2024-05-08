@@ -47,7 +47,7 @@ const Header = () => {
               placeholder="Search"
               className="rounded-l-md w-full  px-2 py-2 text-black" value ={query} onChange={(e)=>setQuery(e.target.value)}
             ></input>
-            <div className="bg-[#FEBD69] p-2 text-black  rounded-r-md outline-none" onClick={searchHandler}>
+            <div className="bg-[#FEBD69] p-2 text-black  rounded-r-md outline-none cursor-pointer" onClick={searchHandler}>
               
               <CgSearch size={"24px"} />
             </div>
