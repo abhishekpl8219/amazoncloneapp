@@ -1,11 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import Ratings from "./shared/Ratings";
+import { useRouter } from "next/navigation";
 const ProductCard = ({ product }: { product: any }) => {
+  const router = useRouter();
   return (
     <div>
       <div>
-        <div className="bg-gray-100  flex items-center justify-center rounded-md h-[250px]">
+        <div className="bg-gray-100  flex items-center justify-center rounded-md h-[250px] cursor-pointer" onClick={()=>{
+          router.push(`/product/${product.id}`)
+        }}>
         <Image className="mix-blend-multiply p-8"
           src={product.image}
           alt={product.title}
