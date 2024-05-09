@@ -5,9 +5,10 @@ import { useAppDispatch } from '@/lib/supabase/hooks/redux'
 import { addToCart } from '@/redux/cartSlice'
 import ProductCard from './ProductCard'
 import { MdProductionQuantityLimits } from 'react-icons/md'
+import { useRouter } from 'next/navigation'
 const AddToCart = ({product}:{product:any}) => {
   const dispatch = useAppDispatch();
-
+   const router = useRouter();
   return (
     <div className='border border-gray-300 rounded-md h-fit'>
         <div className='p-4'><Image src = {prime} width={40} height={40} alt = {"prime"}/></div>
@@ -18,6 +19,7 @@ const AddToCart = ({product}:{product:any}) => {
                 <p className='text-[#147C8F] my-2'>Deliver to Abhishek  - Nadaun 177033</p>
         <button className='bg-[#FFD814] w-full rounded-full py-1' onClick={() => {
                     dispatch(addToCart(product));
+                    router.push("/cart")
                    ;
                 }}>
           Add to cart</button>
