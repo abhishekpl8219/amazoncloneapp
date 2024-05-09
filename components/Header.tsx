@@ -7,6 +7,8 @@ import { CgSearch } from "react-icons/cg";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/lib/supabase/hooks/redux";
+import { getCart } from "@/redux/cartSlice";
 const itemList = [
   "All",
   "Fresh",
@@ -23,6 +25,7 @@ const itemList = [
 const Header = () => {
   const [query,setQuery]=useState<string>("");
   const router = useRouter();
+  const cart = useAppSelector(getCart);
   const searchHandler = ()=>{
     router.push(`/search/${query}`);
   }
@@ -62,7 +65,7 @@ const Header = () => {
               <h1 className="font-medium text-sm">& Orders</h1>
             </div>
             <div className="cursor-pointer">
-              <p className="relative top-3 left-5">0</p>
+              <p className="relative top-3 left-5">{cart.length}</p>
               <div className="flex">
                 {" "}
                 <div>
