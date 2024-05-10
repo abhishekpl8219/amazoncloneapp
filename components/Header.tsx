@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import amazonlogo from "../public/amazon-logo-2.webp";
 import { BiCart } from "react-icons/bi";
 import { CgSearch } from "react-icons/cg";
@@ -9,6 +9,8 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/lib/supabase/hooks/redux";
 import { getCart } from "@/redux/cartSlice";
+import { supabase } from "@/lib/supabase/products";
+
 
 const itemList = [
   "All",
@@ -25,11 +27,22 @@ const itemList = [
 ];
 const Header = () => {
   const [query,setQuery]=useState<string>("");
+  const [user,setUser]=useState<any>(null);
   const router = useRouter();
   const cart = useAppSelector(getCart);
   const searchHandler = ()=>{
     router.push(`/search/${query}`);
   }
+  useEffect(()=>{
+    const getUserData = async()=>{
+      const {data:{user}}= await supabase.auth.getUser();
+      setUser(user);
+    }
+    getUserData();
+
+  }
+  ,[])
+  console.log("value of user",user)
   return (
     <>
       <div className="bg-[#131921] text-white py-1">
@@ -57,8 +70,10 @@ const Header = () => {
             </div>
           </div>
           <div className="flex items-center justify-around w-[20%]">
-            <div className="cursor-pointer">
-              <h1 className="text-xs"> Hello, User</h1>
+            <div className="cursor-pointer" onClick={()=>{
+              router.push("/signin")
+            }}>
+              <h1 className="text-xs hover:underline">{`${user ? user.user_metadata.preferred_username:"Signin"}`}</h1>
               <h1 className="font-medium text-sm">Account & Lists</h1>
             </div>
             <div>
@@ -94,7 +109,10 @@ const Header = () => {
           })}
         </div>
         <div className="mr-5">
-          <h1 className="text-[#FEBD69] font-semibold cursor-pointer hover:underline">
+          <h1 className="text-[#FEBD69] font-semibold cursor-pointer hover:underline" onClick={async()=>{
+            const {error}=  await supabase.auth.signOut(); 
+            router.push("/signin");
+          }}>
             Sign out
           </h1>
         </div>
