@@ -1,6 +1,6 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/lib/supabase/hooks/redux";
-import { decrementQuantity, getCart, incrementQuantity, removeFromTheCart } from "@/redux/cartSlice";
+import { clearAllCart, decrementQuantity, getCart, incrementQuantity, removeFromTheCart } from "@/redux/cartSlice";
 import Image from "next/image";
 import React from "react";
 import Subtotal from "./shared/Subtotal";
@@ -58,9 +58,12 @@ const ShoppingCart = ({cart,totalPrice}:{cart:any,totalPrice:number}) => {
           </div>
         );
       })}
-      
+      <div className="flex justify-between mt-2">
+      <h1 onClick={()=> dispatch(clearAllCart())} className="text-red-600 font-bold cursor-pointer ">CLEAR ALL</h1>
       <Subtotal  length = {cart.length} totalPrice={totalPrice} left = {false}/>
-    </div>
+    
+      </div>
+     </div>
   );
 };
 

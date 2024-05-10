@@ -5,6 +5,10 @@ export const useSupabase  =  () => {
     const [products,setProducts]= useState<any>([]);
     const [filteredData,setFilteredData]= useState<any>([]);
     const [singleProduct,setSingleProduct]=useState<any>([]);
+    const [mensProduct,setMensProduct]=useState<any>([]);
+    const [womensProduct,setWomensProduct]=useState<any>([]);
+    const [electronicsProduct,setElectronicsProduct]=useState<any>([]);
+    const [jewleryProduct,setJeweleryProduct]=useState<any>([]);
     const getDataFromSupabase = async()=>{
         let {data,error}= await supabase.from('Products').select("*");
         if(data){
@@ -39,6 +43,50 @@ export const useSupabase  =  () => {
         }
 
     }
-    return {products,getDataFromSupabase,filteredData,getFilteredData,singleProduct,getSingleProduct};
+    const getsMensClothing = async ()=>{
+        let{data,error}= await supabase.from("Products").select("*").ilike('category',`men's clothing`);
+        if(data){
+            setMensProduct(data);
+           
+        }
+        if (error){
+            console.log(error);
+        }
+
+    }
+    const getsWomensClothing = async ()=>{
+        let{data,error}= await supabase.from("Products").select("*").ilike('category',`women's clothing`);
+        if(data){
+            setWomensProduct(data);
+           
+        }
+        if (error){
+            console.log(error);
+        }
+
+    }
+    const getsElectronics = async ()=>{
+        let{data,error}= await supabase.from("Products").select("*").ilike('category',`electronics`);
+        if(data){
+            setElectronicsProduct(data);
+           
+        }
+        if (error){
+            console.log(error);
+        }
+
+    }
+    const getsJewelry= async ()=>{
+        let{data,error}= await supabase.from("Products").select("*").ilike('category',`jewelry`);
+        if(data){
+            setJeweleryProduct(data);
+           
+        }
+        if (error){
+            console.log(error);
+        }
+
+    }
+    return {products,getDataFromSupabase,filteredData,getFilteredData,singleProduct,getSingleProduct,mensProduct,getsMensClothing,womensProduct,getsWomensClothing,electronicsProduct,getsElectronics,jewleryProduct,getsJewelry};
 
 }
