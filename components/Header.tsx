@@ -9,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/lib/supabase/hooks/redux";
 import { getCart } from "@/redux/cartSlice";
+
 const itemList = [
   "All",
   "Fresh",
@@ -33,9 +34,9 @@ const Header = () => {
     <>
       <div className="bg-[#131921] text-white py-1">
         <div className="flex justify-between items-center w-[90%] mx-auto">
-          <div
+          <Link
             className="w-[10%]
-        "
+        " href = {'/'}
           >
             <Image
               src={amazonlogo}
@@ -43,7 +44,7 @@ const Header = () => {
               width={150}
               height={150}
             />
-          </div>
+          </Link>
           <div className="w-[60%] border-white flex items-center">
             <input
               type="text"
@@ -64,16 +65,16 @@ const Header = () => {
               <p className="text-xs">Return</p>
               <h1 className="font-medium text-sm">& Orders</h1>
             </div>
-            <div className="cursor-pointer">
+            <Link className="cursor-pointer" href = {"/cart"}>
               <p className="relative top-3 left-5">{cart.length}</p>
               <div className="flex">
-                {" "}
+               
                 <div>
                   <BiCart size={"40px"} />
                 </div>
                 <h1 className="mt-4">Cart</h1>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>
