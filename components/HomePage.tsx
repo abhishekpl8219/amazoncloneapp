@@ -21,7 +21,7 @@ const HomePage = () => {
     getsWomensClothing();
     getsElectronics();
     getsJewelry();
-  }, []);
+  }, [getsMensClothing,getsWomensClothing,getsElectronics,getsJewelry]);
 
   return (
     <div>

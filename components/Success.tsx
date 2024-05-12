@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const success = () => {
+const Success = () => {
     const cart = useAppSelector(getCart)
   return (
     <div className='absolute top-0 w-full bg-white py-12'>
@@ -17,7 +17,7 @@ const success = () => {
             {
                 cart.map((product:any)=>{
                     return(
-                        <div className='flex'>
+                        <div className='flex' key = {product.id}>
                             {
                          <Image src ={product.image} alt = {product.title} width = {100} height= {100}/> 
                             }
@@ -37,4 +37,4 @@ const success = () => {
   )
 }
 
-export default success
+export default Success
