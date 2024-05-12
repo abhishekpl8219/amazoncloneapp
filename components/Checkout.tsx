@@ -10,6 +10,10 @@ import DeliveryAddress from "./DeliveryAddress";
 
 const Checkout = () => {
   const cart = useAppSelector(getCart);
+  let totalPrice=0;
+  cart.forEach((item:any)=>{
+    totalPrice += item.price * item.quantity
+  })
   return (
     <>
       <div className="absolute top-0 w-full p-9 bg-white  ">
@@ -32,7 +36,7 @@ const Checkout = () => {
         <div className="flex justify-between w-[70%] mx-auto">
           
           <DeliveryAddress />
-          <OrderSummary />
+          <OrderSummary totalPrice = {totalPrice} />
         </div>
       </div>
     </>

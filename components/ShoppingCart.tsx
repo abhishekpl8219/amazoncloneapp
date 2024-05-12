@@ -33,7 +33,7 @@ const ShoppingCart = ({cart,totalPrice}:{cart:any,totalPrice:number}) => {
                 <p className=" ml-2 text-[#007600] m-2 text-xs font-bold">
                   In Stock
                 </p>
-                <h1 className=" ml-2 font-bold text-red-600 cursor-pointer mb-2" onClick={()=>{dispatch(removeFromTheCart(product.id))}}>
+                <h1 className=" ml-2 font-bold text-red-600 cursor-pointer mb-2 w-fit" onClick={()=>{dispatch(removeFromTheCart(product.id))}}>
                   REMOVE
                 </h1>
                 <div className="ml-2 flex items-center bg-gray-200 rounded-md  px-5 py-1 w-fit text-xl font-medium gap-2 justify-between">
